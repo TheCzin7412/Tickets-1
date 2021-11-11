@@ -521,9 +521,6 @@ class Acciones
         }
 
 
-
-
-
     public function agregar_peticion_empresa($rfcEmpresa,$nombreEmpresa,$razonsocialEmpresa,$domicilioEmpresa,$numerocalleEmpresa,$coloniaEmpresa,$cpEmpresa,$municipioEmpresa,$estadoEmpresa,$telefonoEmpresa,$correoEmpresa,$contrasenaEmpresa)
     {
         $servidor = new Servidor();
@@ -636,7 +633,6 @@ class Acciones
         $randos= rand(100000,999999);
         $fecha = date("D/m/A H:i:s");
         $cifrado = sha1($correo.$fecha.$randos);
-
 
         if($columnas==0)
         {
@@ -782,7 +778,148 @@ class Acciones
         }   
     }
     
+    public function editar_empleado($idUsuario,$idSesion,$id,$tipo,$valor)
+    {
+            $verificacion  = $this->checarSesion($idUsuario,$idSesion);
+            if($verificacion==$idSesion)
+            {
+                $modelo = new Servidor();
+                $conexion = $modelo->conectar();
+                $parametro="";
 
+                if($tipo=="nombre")
+                {
+                    $sql = "UPDATE empleado  SET nombreEmpleado=:nombre WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":nombre",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="apellidoP")
+                {
+                    $sql = "UPDATE empleado  SET apellidopEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="apellidoM")
+                {
+                    $sql = "UPDATE empleado  SET apellidomEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="domicilio")
+                {
+                    $sql = "UPDATE empleado  SET domicilioEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="numExt")
+                {
+                    $sql = "UPDATE empleado  SET numeroextEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="colonia")
+                {
+                    $sql = "UPDATE empleado  SET coloniaEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="telefono")
+                {
+                    $sql = "UPDATE empleado  SET telefonoEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="puesto")
+                {
+                    $sql = "UPDATE empleado  SET puestoEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+                if($tipo=="correo")
+                {
+                    $sql = "UPDATE empleado  SET correoEmpleado=:dato WHERE id=:id";
+                    $parametro = $conexion->prepare($sql);
+                    $parametro->bindParam(":dato",$valor);
+                    $parametro->bindParam(":id",$id);
+                    if($parametro->execute())
+                    {
+                        return "listo";
+                    }
+                }
+            }
+            else
+            {
+                return "error";
+            }
+
+    }
+
+    public function  eliminar_usuario($idUsuario,$idSesion,$id)
+    {
+
+        $verificacion  = $this->checarSesion($idUsuario,$idSesion);
+        if($verificacion==$idSesion)
+        {
+            $sql = "DELETE FROM empleado WHERE id=:id";
+            $modelo = new Servidor();
+            $conexion = $modelo->conectar();
+            
+            $parametro = $conexion->prepare($sql);
+            $parametro->bindParam(":id",$id);
+            if($parametro->execute())
+            {
+                return "listo";
+            }
+            else
+            {
+                return "error 400";
+            }
+        }
+        else
+        {
+            return "error";
+        }
+    }
     
 }
 ?>

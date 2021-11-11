@@ -844,55 +844,68 @@ function getCookie(nombreCookie)
 var array_editar_empleados = []
 var array_editados_empleados = []
 var checar_editar_usuarios = true
-function editar_empleado(event)
-{
-   
-   
 
+var nombre2
+var apellidoP2
+var apellidoM2
+var domicilio2
+var numExt2
+var colonia2
+var telefono2
+var puesto2
+var correo2
+
+var nombre
+var apellidoP
+var apellidoM
+var domicilio
+var numExt
+var colonia
+var telefono
+var puesto
+var correo
+
+
+var id_input
+
+
+
+function editar_empleado(event)
+{ 
     
-    let nombre2
-    let apellidoP2
-    let apellidoM2
-    let domicilio2
-    let numExt2
-    let colonia2
-    let telefono2
-    let puesto2
-    let correos2
 
     let elemento=event.target
     let padre = elemento.parentNode.parentNode
     let hijos = padre.children
 
-    let nombre =hijos[1].children[0].value
-    let apellidoP = hijos[2].children[0].value
-    let apellidoM =hijos[3].children[0].value
-    let domicilio =hijos[4].children[0].value
-    let numExt = hijos[5].children[0].value
-    let colonia = hijos[6].children[0].value
-    let telefono 
-    let puesto 
-    let correo 
-
-    let id_input = hijos[0].children[0].value
-    let nombre_input = hijos[1].children[0].value
-
     
-    console.log(hijos)
-
-    console.log("------------")
-    console.log(apellidoP)
-    console.log("------------")
-
+    // console.log(hijos)
     if(checar_editar_usuarios)
     {
+        // let nombre_input = hijos[1].children[0].value
+        id_input = hijos[0].children[0].value
+        nombre =hijos[1].children[0].value.trim()
+        apellidoP = hijos[2].children[0].value.trim()
+        apellidoM =hijos[3].children[0].value.trim()
+        domicilio =hijos[4].children[0].value.trim()
+        numExt = hijos[5].children[0].value.trim()
+        colonia = hijos[6].children[0].value.trim()
+        telefono = hijos[7].children[0].value.trim()
+        puesto = hijos[8].children[0].value.trim()
+        correo = hijos[9].children[0].value.trim()
+
+        console.log("primera coincidencia")
+        console.log(nombre)
+        console.log("------------")
+
+
         for(let i=0; i<hijos.length;i++)
         {
             let inputs = hijos[i].children
             let numero_input= inputs.length
             if(numero_input==1)
             {
-                let valorID = inputs[0].value
+                let valorID = inputs[0].value.trim()
                 // let valorNombre inputs[1]
                 inputs[0].style.border= "solid 2px red"
                 inputs[0].disabled=false
@@ -910,6 +923,20 @@ function editar_empleado(event)
     }
     else
     {
+        nombre2 =hijos[1].children[0].value.trim()
+        apellidoP2 = hijos[2].children[0].value.trim()
+        apellidoM2 =hijos[3].children[0].value.trim()
+        domicilio2 =hijos[4].children[0].value.trim()
+        numExt2 = hijos[5].children[0].value.trim()
+        colonia2 = hijos[6].children[0].value.trim()
+        telefono2 = hijos[7].children[0].value.trim()
+        puesto2 = hijos[8].children[0].value.trim()
+        correo2 = hijos[9].children[0].value.trim()
+
+        console.log("Segunda coincidencia")
+        console.log(nombre2)
+        console.log("------------")
+
         for(let i=0; i<hijos.length;i++)
         {
             let inputs = hijos[i].children
@@ -929,10 +956,199 @@ function editar_empleado(event)
                 console.log(hijos_editar)
             }
         }
+
+        if(nombre!=nombre2)
+        {
+            console.log("se edito nombre")
+
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","nombre")
+            info.append("valor",nombre2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+
+        }
+        if(apellidoP!=apellidoP2)
+        {
+            console.log("se edito apellido P")
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","apellidoP")
+            info.append("valor",apellidoP2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        if(apellidoM!=apellidoM2)
+        {
+            console.log("se edito apellido M")
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","apellidoM")
+            info.append("valor",apellidoM2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        if(domicilio!=domicilio2)
+        {
+            console.log("se edito domicilio")
+
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","domicilio")
+            info.append("valor",domicilio2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        if(numExt!=numExt2)
+        {
+            console.log("se edito numExt")
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","numExt")
+            info.append("valor",numExt2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        if(colonia!=colonia2)
+        {
+            console.log("se edito colonia")
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","colonia")
+            info.append("valor",colonia2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        if(telefono!=telefono2)
+        {
+            console.log("se edito telefono")
+
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","telefono")
+            info.append("valor",telefono2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        if(puesto!=puesto2)
+        {
+            console.log("se edito puesto")
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","puesto")
+            info.append("valor",puesto2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        if(correo!=correo2)
+        {
+            console.log("se edito correo")
+            let info = new FormData()
+
+            info.append("id",id_input)
+            info.append("tipo","correo")
+            info.append("valor",correo2)
+            enviarDatos("POST","../controlador/editar_empleado.php",info)
+        }
+        tomar_datos_empleado()
         checar_editar_usuarios=true
     }
     console.log(array_editar_empleados)
     console.log(array_editados_empleados)
+}
+
+
+function eliminar_empleado(event)
+{   
+    let elemento = event.target
+    let padre = elemento.parentNode.parentNode
+    let id_objetivo = padre.id
+    // alert(padre)
+    // console.log(id_objetivo)    
+    // let estado  = "0"
+    let datos = new FormData()
+    datos.append("id_empleado",id_objetivo)
+    // datos.append("estado",estado)
+    let confirmacion = confirm("¿Esta seguro de elimiar a este empleado?")
+    // confirmacion = false
+    if(confirmacion)
+    {
+        let ajax = new XMLHttpRequest()
+
+    ajax.open("POST","../controlador/eliminar_empleado.php")
+
+    ajax.send(datos)
+
+    ajax.onreadystatechange =function () 
+    {
+            if (ajax.readyState == 4) 
+            {
+                if (ajax.status == 200) 
+                {
+                    // console.log("200 Respuesta Exitosa");
+                    console.log(ajax.responseText)
+                    let elementId =id_objetivo
+                    let node=document.getElementById(elementId);
+                    node.parentNode.removeChild(node);  
+                    // tomar_datos_empleado_noactivos()      
+                }
+                if (ajax.status == 400) 
+                {
+                    console.log("400 El servidor no entendió la petición");
+                }
+                if (ajax.status == 404)
+                {
+                    console.log("404 Página no encontrada");
+                }
+                if (ajax.status == 500) {
+                    console.log("500 Error interno de servidor");
+                }
+            }            
+        }
+    }
     
+    console.log(padre)
+
+}
+
+
+
+
+// var respuesta
+
+function enviarDatos(metodo,url,datos)
+{
+    let ajax = new XMLHttpRequest()
+
+       ajax.open(metodo,url)
+
+       ajax.send(datos)
+
+       ajax.onreadystatechange =function () 
+       {
+            if (ajax.readyState == 4) 
+            {
+                if (ajax.status == 200) 
+                {
+                    // console.log("200 Respuesta Exitosa");
+                    console.log(ajax.responseText)
+                    // respuesta = ajax.responseText
+                    // return respuesta
+                }
+                if (ajax.status == 400) 
+                {
+                    console.log("400 El servidor no entendió la petición");
+                }
+                if (ajax.status == 404)
+                {
+                    console.log("404 Página no encontrada");
+                }
+                if (ajax.status == 500) 
+                {
+                    console.log("500 Error interno de servidor");
+                }
+            }            
+        }
 }
 
